@@ -27,5 +27,6 @@ Node::Node(int row, int col, int val, Node *prev, Node *next) {
 Node::~Node() {
     if(this->next != nullptr){
         delete this->next;
+        delete this->prev;
     }
 }
