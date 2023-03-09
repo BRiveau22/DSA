@@ -1,5 +1,6 @@
 #include "Node.h"
 #include <vector>
+#include <string>
 
 #pragma once
 class Sparse_Matrix {
