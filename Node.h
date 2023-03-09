@@ -1,10 +1,4 @@
-//
-// Created by PC on 3/9/2023.
-//
-
-#ifndef DSA_NODE_H
-#define DSA_NODE_H
-
+#pragma once
 
 class Node {
 private:
@@ -18,7 +12,5 @@ public:
     Node();
     Node(int row,int col,int val);
     Node(int row,int col,int val,Node* prev,Node* next);
+    ~Node();
 };
-
-
-#endif //DSA_NODE_H
