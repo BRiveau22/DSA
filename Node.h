@@ -16,8 +16,8 @@ private:
 
 public:
     Node();
-    Node(row,col,val);
-    Node(row,col,val,prev,next);
+    Node(int row,int col,int val);
+    Node(int row,int col,int val,Node* prev,Node* next);
 };
 
 
