@@ -7,4 +7,4 @@ include_directories(.)
 
 add_executable(DSA
         Node.cpp
-        Node.h)
+        Node.h "Sparse_Matrix.h" "Sparse_Matrix.cpp")
