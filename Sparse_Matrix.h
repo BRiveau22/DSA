@@ -1,6 +1,7 @@
 #include "Node.h"
 #include <vector>
 #include <string>
+#include<iostream>
 
 #pragma once
 class Sparse_Matrix {
@@ -17,4 +18,5 @@ public:
 	Sparse_Matrix add(Sparse_Matrix add_matrix);
 	Sparse_Matrix insert_row(int row, std::vector<int> new_row);
 	Sparse_Matrix insert_col(int col, std::vector<int> new_col);
+	void print_matrix();
 };
