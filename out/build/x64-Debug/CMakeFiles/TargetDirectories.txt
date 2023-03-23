@@ -1,3 +1,0 @@
-C:/Users/brive/source/repos/BRiveau22/DSA/out/build/x64-Debug/CMakeFiles/DSA.dir
-C:/Users/brive/source/repos/BRiveau22/DSA/out/build/x64-Debug/CMakeFiles/edit_cache.dir
-C:/Users/brive/source/repos/BRiveau22/DSA/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
