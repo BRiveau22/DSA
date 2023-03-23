@@ -9,9 +9,10 @@ Sparse_Matrix::Sparse_Matrix() {
 }
 
 Sparse_Matrix::Sparse_Matrix(std::vector<std::vector<int>> matrix) {
-	Node* current_node = new Node();
 	for (int y = 0; y < matrix.size(); y++) {
 		for (int x = 0; x < matrix[y].size(); x++) {
+			Node* current_node = new Node();
+
 			if (matrix[y][x] != 0) {
 				current_node->row = y;
 				current_node->col = x;
@@ -28,13 +29,12 @@ Sparse_Matrix::Sparse_Matrix(std::vector<std::vector<int>> matrix) {
 				this->cols = this->tail->col + 1;
 			}
 
-			if (current_node != nullptr) {
+			if (current_node->val != 0) {
 				current_node->next = new Node();
-				current_node->next->prev = current_node;
 				current_node = current_node->next;
 			}
 		}
-	}	
+	}
 }
 
 /*Sparse_Matrix Sparse_Matrix::multiply(Sparse_Matrix mult_matrix) {
@@ -71,6 +71,7 @@ Sparse_Matrix Sparse_Matrix::add(Sparse_Matrix add_matrix) {
 	Node* this_current_node = this->head;
 	Node* other_current_node = add_matrix.head;
 
+	//Current Sparse Matrices are created incorrectly
 	if (this->num_elements > add_matrix.num_elements) {
 		while (other_current_node != nullptr) {
 			if (this_current_node->row == other_current_node->row && this_current_node->col == other_current_node->col) {
@@ -89,7 +90,7 @@ Sparse_Matrix Sparse_Matrix::add(Sparse_Matrix add_matrix) {
 		}
 
 		while (this_current_node != nullptr) {
-			new_matrix[this_current_node->row][this_current_node->col] = this_current_node->val;
+			new_matrix[this_current_node->row][this_current_node->col] = new_matrix[this_current_node->row][this_current_node->col] + this_current_node->val;
 			this_current_node = this_current_node->next;
 		}
 	}
@@ -111,7 +112,7 @@ Sparse_Matrix Sparse_Matrix::add(Sparse_Matrix add_matrix) {
 		}
 
 		while (other_current_node != nullptr) {
-			new_matrix[other_current_node->row][other_current_node->col] = other_current_node->val;
+			new_matrix[other_current_node->row][other_current_node->col] = new_matrix[other_current_node->row][other_current_node->col] +  other_current_node->val;
 			other_current_node = other_current_node->next;
 		}
 	}
