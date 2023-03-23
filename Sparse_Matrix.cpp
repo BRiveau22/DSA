@@ -78,19 +78,11 @@ Sparse_Matrix Sparse_Matrix::add(Sparse_Matrix add_matrix) {
 				this_current_node = this_current_node->next;
 				other_current_node = other_current_node->next;
 			}
-			else if (this_current_node->row >= other_current_node->row) {
+			else if (this_current_node->row >= other_current_node->row || this_current_node->col >= other_current_node->col) {
 				new_matrix[other_current_node->row][other_current_node->col] = other_current_node->val;
 				other_current_node = other_current_node->next;
 			}
-			else if (this_current_node->row < other_current_node->row) {
-				new_matrix[this_current_node->row][this_current_node->col] = this_current_node->val;
-				this_current_node = this_current_node->next;
-			}
-			else if (this_current_node->col >= other_current_node->col) {
-				new_matrix[other_current_node->row][other_current_node->col] = other_current_node->val;
-				other_current_node = other_current_node->next;
-			}
-			else if (this_current_node->col < other_current_node->col) {
+			else if (this_current_node->row < other_current_node->row || this_current_node->col < other_current_node->col) {
 				new_matrix[this_current_node->row][this_current_node->col] = this_current_node->val;
 				this_current_node = this_current_node->next;
 			}
@@ -108,19 +100,11 @@ Sparse_Matrix Sparse_Matrix::add(Sparse_Matrix add_matrix) {
 				this_current_node = this_current_node->next;
 				other_current_node = other_current_node->next;
 			}
-			else if (this_current_node->row >= other_current_node->row) {
+			else if (this_current_node->row >= other_current_node->row || this_current_node->col >= other_current_node->col) {
 				new_matrix[this_current_node->row][this_current_node->col] = this_current_node->val;
 				this_current_node = this_current_node->next;
 			}
-			else if (this_current_node->row < other_current_node->row) {
-				new_matrix[other_current_node->row][other_current_node->col] = other_current_node->val;
-				other_current_node = other_current_node->next;
-			}
-			else if (this_current_node->col >= other_current_node->col) {
-				new_matrix[this_current_node->row][this_current_node->col] = this_current_node->val;
-				this_current_node = this_current_node->next;
-			}
-			else if (this_current_node->col < other_current_node->col) {
+			else if (this_current_node->row < other_current_node->row || this_current_node->col < other_current_node->col) {
 				new_matrix[other_current_node->row][other_current_node->col] = other_current_node->val;
 				other_current_node = other_current_node->next;
 			}
@@ -138,19 +122,11 @@ Sparse_Matrix Sparse_Matrix::add(Sparse_Matrix add_matrix) {
 				this_current_node = this_current_node->next;
 				other_current_node = other_current_node->next;
 			}
-			else if (this_current_node->row >= other_current_node->row) {
+			else if (this_current_node->row >= other_current_node->row || this_current_node->col >= other_current_node->col) {
 				new_matrix[this_current_node->row][this_current_node->col] = this_current_node->val;
 				this_current_node = this_current_node->next;
 			}
-			else if (this_current_node->row < other_current_node->row) {
-				new_matrix[other_current_node->row][other_current_node->col] = other_current_node->val;
-				other_current_node = other_current_node->next;
-			}
-			else if (this_current_node->col >= other_current_node->col) {
-				new_matrix[this_current_node->row][this_current_node->col] = this_current_node->val;
-				this_current_node = this_current_node->next;
-			}
-			else if (this_current_node->col < other_current_node->col) {
+			else if (this_current_node->row < other_current_node->row || this_current_node->col < other_current_node->col) {
 				new_matrix[other_current_node->row][other_current_node->col] = other_current_node->val;
 				other_current_node = other_current_node->next;
 			}
