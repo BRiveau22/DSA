@@ -11,6 +11,9 @@
 *.vcxproj.*
 *.vcproj.*
 /VS Files
+.vs/
+bin/
+obj/
 
 # CMake Files
 CMakeCache.txt
