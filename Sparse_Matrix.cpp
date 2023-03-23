@@ -71,7 +71,7 @@ Sparse_Matrix Sparse_Matrix::add(Sparse_Matrix add_matrix) {
 	Node* this_current_node = this->head;
 	Node* other_current_node = add_matrix.head;
 
-	if (this->num_elements > add_matrix->num_elements) {
+	if (this->num_elements > add_matrix.num_elements) {
 		while (other_current_node != nullptr) {
 			if (this_current_node->row == other_current_node->row && this_current_node->col == other_current_node->col) {
 				new_matrix[this_current_node->row][this_current_node->col] = this_current_node->val + other_current_node->val;
@@ -101,7 +101,7 @@ Sparse_Matrix Sparse_Matrix::add(Sparse_Matrix add_matrix) {
 			this_current_node = this_current_node->next;
 		}
 	}
-	else if (this->num_elements < add_matrix->num_elements) {
+	else if (this->num_elements < add_matrix.num_elements) {
 		while (this_current_node != nullptr) {
 			if (this_current_node->row == other_current_node->row && this_current_node->col == other_current_node->col) {
 				new_matrix[this_current_node->row][this_current_node->col] = this_current_node->val + other_current_node->val;
