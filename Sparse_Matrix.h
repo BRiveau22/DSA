@@ -10,6 +10,7 @@ private:
 	int cols;
 	Node* head;
 	Node* tail;
+	int num_elements;
 	void decrement(std::string row_col, bool decrement);
 public:
 	Sparse_Matrix();

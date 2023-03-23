@@ -5,6 +5,7 @@ Sparse_Matrix::Sparse_Matrix() {
 	this->cols = 0;
 	this->head = nullptr;
 	this->tail = nullptr;
+	this->num_elements = 0;
 }
 
 Sparse_Matrix::Sparse_Matrix(std::vector<std::vector<int>> matrix) {
@@ -15,6 +16,7 @@ Sparse_Matrix::Sparse_Matrix(std::vector<std::vector<int>> matrix) {
 				current_node->row = y;
 				current_node->col = x;
 				current_node->val = matrix[y][x];
+				this->num_elements++;
 			}
 
 			if (y == 0 && x == 0) {
@@ -47,6 +49,7 @@ Sparse_Matrix Sparse_Matrix::add(Sparse_Matrix add_matrix) {
 	int max_row;
 	int max_col;
 
+
 	//Finds the max row and column of the two matrices
 	if (add_matrix.rows > this->rows) {
 		max_row = add_matrix.rows;
@@ -68,28 +71,89 @@ Sparse_Matrix Sparse_Matrix::add(Sparse_Matrix add_matrix) {
 	Node* this_current_node = this->head;
 	Node* other_current_node = add_matrix.head;
 
-	//Need to modify to run when matrices are of different sizes
-	while (this_current_node != nullptr || other_current_node != nullptr) {
-		if (this_current_node->row == other_current_node->row && this_current_node->col == other_current_node->col) {
-			new_matrix[this_current_node->row][this_current_node->col] = this_current_node->val + other_current_node->val;
-			this_current_node = this_current_node->next;
-			other_current_node = other_current_node->next;
+	if (this->num_elements > add_matrix->num_elements) {
+		while (other_current_node != nullptr) {
+			if (this_current_node->row == other_current_node->row && this_current_node->col == other_current_node->col) {
+				new_matrix[this_current_node->row][this_current_node->col] = this_current_node->val + other_current_node->val;
+				this_current_node = this_current_node->next;
+				other_current_node = other_current_node->next;
+			}
+			else if (this_current_node->row >= other_current_node->row) {
+				new_matrix[other_current_node->row][other_current_node->col] = other_current_node->val;
+				other_current_node = other_current_node->next;
+			}
+			else if (this_current_node->row < other_current_node->row) {
+				new_matrix[this_current_node->row][this_current_node->col] = this_current_node->val;
+				this_current_node = this_current_node->next;
+			}
+			else if (this_current_node->col >= other_current_node->col) {
+				new_matrix[other_current_node->row][other_current_node->col] = other_current_node->val;
+				other_current_node = other_current_node->next;
+			}
+			else if (this_current_node->col < other_current_node->col) {
+				new_matrix[this_current_node->row][this_current_node->col] = this_current_node->val;
+				this_current_node = this_current_node->next;
+			}
 		}
-		else if (this_current_node->row >= other_current_node->row) {
-			new_matrix[other_current_node->row][other_current_node->col] = other_current_node->val;
-			other_current_node = other_current_node->next;
-		}
-		else if (this_current_node->row < other_current_node->row) {
+
+		while (this_current_node != nullptr) {
 			new_matrix[this_current_node->row][this_current_node->col] = this_current_node->val;
 			this_current_node = this_current_node->next;
 		}
-		else if (this_current_node->col >= other_current_node->col) {
+	}
+	else if (this->num_elements < add_matrix->num_elements) {
+		while (this_current_node != nullptr) {
+			if (this_current_node->row == other_current_node->row && this_current_node->col == other_current_node->col) {
+				new_matrix[this_current_node->row][this_current_node->col] = this_current_node->val + other_current_node->val;
+				this_current_node = this_current_node->next;
+				other_current_node = other_current_node->next;
+			}
+			else if (this_current_node->row >= other_current_node->row) {
+				new_matrix[this_current_node->row][this_current_node->col] = this_current_node->val;
+				this_current_node = this_current_node->next;
+			}
+			else if (this_current_node->row < other_current_node->row) {
+				new_matrix[other_current_node->row][other_current_node->col] = other_current_node->val;
+				other_current_node = other_current_node->next;
+			}
+			else if (this_current_node->col >= other_current_node->col) {
+				new_matrix[this_current_node->row][this_current_node->col] = this_current_node->val;
+				this_current_node = this_current_node->next;
+			}
+			else if (this_current_node->col < other_current_node->col) {
+				new_matrix[other_current_node->row][other_current_node->col] = other_current_node->val;
+				other_current_node = other_current_node->next;
+			}
+		}
+
+		while (other_current_node != nullptr) {
 			new_matrix[other_current_node->row][other_current_node->col] = other_current_node->val;
 			other_current_node = other_current_node->next;
 		}
-		else if (this_current_node->col < other_current_node->col) {
-			new_matrix[this_current_node->row][this_current_node->col] = this_current_node->val;
-			this_current_node = this_current_node->next;
+	}
+	else {
+		while (this_current_node != nullptr && other_current_node != nullptr) {
+			if (this_current_node->row == other_current_node->row && this_current_node->col == other_current_node->col) {
+				new_matrix[this_current_node->row][this_current_node->col] = this_current_node->val + other_current_node->val;
+				this_current_node = this_current_node->next;
+				other_current_node = other_current_node->next;
+			}
+			else if (this_current_node->row >= other_current_node->row) {
+				new_matrix[this_current_node->row][this_current_node->col] = this_current_node->val;
+				this_current_node = this_current_node->next;
+			}
+			else if (this_current_node->row < other_current_node->row) {
+				new_matrix[other_current_node->row][other_current_node->col] = other_current_node->val;
+				other_current_node = other_current_node->next;
+			}
+			else if (this_current_node->col >= other_current_node->col) {
+				new_matrix[this_current_node->row][this_current_node->col] = this_current_node->val;
+				this_current_node = this_current_node->next;
+			}
+			else if (this_current_node->col < other_current_node->col) {
+				new_matrix[other_current_node->row][other_current_node->col] = other_current_node->val;
+				other_current_node = other_current_node->next;
+			}
 		}
 	}
 
