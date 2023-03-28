@@ -11,7 +11,6 @@ private:
 	Node* head;
 	Node* tail;
 	int num_elements;
-	void decrement(std::string row_col, bool decrement);
 	std::vector<std::vector<int>> add(Sparse_Matrix longer, Sparse_Matrix shorter, int max_row, int max_col);
 	std::vector<std::vector<int>> multiply(Sparse_Matrix longer, Sparse_Matrix shorter);
 	std::pair<int, int> get_max_row_col(Sparse_Matrix other);

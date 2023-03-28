@@ -15,7 +15,6 @@ Sparse_Matrix::Sparse_Matrix(std::vector<std::vector<int>> matrix) {
 
 	for (int y = 0; y < matrix.size(); y++) {
 		for (int x = 0; x < matrix[y].size(); x++) {
-
 			if (matrix[y][x] != 0) {
 				current_node->row = y;
 				current_node->col = x;
@@ -41,7 +40,6 @@ std::pair<int, int> Sparse_Matrix::get_max_row_col(Sparse_Matrix other) {
 	int max_row = 0;
 	int max_col = 0;
 
-	//Finds the max row and column of the two matrices
 	if (other.rows > this->rows) {
 		max_row = other.rows;
 	}
@@ -105,7 +103,7 @@ Sparse_Matrix Sparse_Matrix::add(Sparse_Matrix add_matrix) {
 	std::vector<std::vector<int>> new_matrix;
 
 	//Reassigns the new matrix to the sum of the two matrices
-	if (this->num_elements > add_matrix.num_elements) {
+	if (this->num_elements >= add_matrix.num_elements) {
 		new_matrix = this->add(*this, add_matrix, max_row, max_col);
 	}
 	else {
@@ -119,8 +117,6 @@ Sparse_Matrix Sparse_Matrix::add(Sparse_Matrix add_matrix) {
 
 Sparse_Matrix Sparse_Matrix::multiply(Sparse_Matrix mult_matrix) {
 	std::pair<int, int> extremes = this->get_max_row_col(mult_matrix);
-	int max_row = extremes.first;
-	int max_col = extremes.second;
 
 	//Creates a new 2D vector with the max row and column
 	std::vector<std::vector<int>> new_matrix;
@@ -137,22 +133,30 @@ void Sparse_Matrix::insert(int row, int col, int val) {
 	Node* current_node = this->head;
 
 	while (current_node->next != nullptr) {
+		//Handles the case where the node is inserted in the middle
 		if (current_node->next->row > row || (current_node->next->row == row && current_node->next->col > col)) {
 			current_node->next = new Node(row, col, val, current_node->next);
 			this->num_elements++;
 		}
+		//Handles the case where the node is inserted in the middle and the location is the same
+		else if (current_node->next->row == row && current_node->next->col == col) {
+			current_node->next->val = val;
+		}
 		current_node = current_node->next;
 	}
 
+	//Handles the case where the node is inserted at the tail
 	if (current_node->next == nullptr && current_node->row <= row || (current_node->row == row && current_node->col < col)) {
 		current_node->next = new Node(row, col, val);
 		this->num_elements++;
 	}
+	//Handles the case where the node is inserted at the head of an otherwise empty matrix
 	else if (current_node->next == nullptr && current_node->row > row || (current_node->row == row && current_node->col > col)) {
 		Node* new_node = new Node(row, col, val, current_node);
 		this->head = new_node;
 		this->num_elements++;
 	}
+	//Handles the case where the node is inserted at the tail, or the head of an otherwise empty matrix and the location is the same
 	else if (current_node->next == nullptr && current_node->row == row && current_node->col == col) {
 		current_node->val = val;
 	}
