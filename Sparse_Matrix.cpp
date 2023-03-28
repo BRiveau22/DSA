@@ -9,9 +9,12 @@ Sparse_Matrix::Sparse_Matrix() {
 }
 
 Sparse_Matrix::Sparse_Matrix(std::vector<std::vector<int>> matrix) {
+	Node* current_node = new Node();
+	this->head = current_node;
+	this->num_elements = 0;
+
 	for (int y = 0; y < matrix.size(); y++) {
 		for (int x = 0; x < matrix[y].size(); x++) {
-			Node* current_node = new Node();
 
 			if (matrix[y][x] != 0) {
 				current_node->row = y;
@@ -20,21 +23,34 @@ Sparse_Matrix::Sparse_Matrix(std::vector<std::vector<int>> matrix) {
 				this->num_elements++;
 			}
 
-			if (y == 0 && x == 0) {
-				this->head = current_node;
-			}
 			if (y == matrix.size() - 1 && x == matrix[y].size() - 1) {
 				this->tail = current_node;
 				this->rows = this->tail->row + 1;
 				this->cols = this->tail->col + 1;
 			}
-
-			if (current_node->val != 0) {
+			else {
 				current_node->next = new Node();
 				current_node = current_node->next;
 			}
 		}
 	}
+}
+
+//Private add
+std::vector<std::vector<int>> Sparse_Matrix::add(Node* current_node_longer, Node* current_node_shorter, int max_row, int max_col) {
+	std::vector<std::vector<int>> new_matrix(max_row, std::vector<int>(max_col, 0));
+
+	while (current_node_longer != nullptr) {
+		new_matrix[current_node_longer->row][current_node_longer->col] += current_node_longer->val;
+		current_node_longer = current_node_longer->next;
+	}
+
+	while (current_node_shorter != nullptr) {
+		new_matrix[current_node_shorter->row][current_node_shorter->col] += current_node_shorter->val;
+		current_node_shorter = current_node_shorter->next;
+	}
+
+	return new_matrix;
 }
 
 /*Sparse_Matrix Sparse_Matrix::multiply(Sparse_Matrix mult_matrix) {
@@ -46,9 +62,8 @@ Sparse_Matrix::Sparse_Matrix(std::vector<std::vector<int>> matrix) {
 }*/
 
 Sparse_Matrix Sparse_Matrix::add(Sparse_Matrix add_matrix) {
-	int max_row;
-	int max_col;
-
+	int max_row = 0;
+	int max_col = 0;
 
 	//Finds the max row and column of the two matrices
 	if (add_matrix.rows > this->rows) {
@@ -65,7 +80,7 @@ Sparse_Matrix Sparse_Matrix::add(Sparse_Matrix add_matrix) {
 	}
 
 	//Creates a new 2D vector with the max row and column
-	std::vector<std::vector<int>> new_matrix(max_row, std::vector<int>(max_col, 0));
+	std::vector<std::vector<int>> new_matrix;
 	
 	//Creates node pointers to the head of each matrix
 	Node* this_current_node = this->head;
@@ -73,65 +88,10 @@ Sparse_Matrix Sparse_Matrix::add(Sparse_Matrix add_matrix) {
 
 	//Current Sparse Matrices are created incorrectly
 	if (this->num_elements > add_matrix.num_elements) {
-		while (other_current_node != nullptr) {
-			if (this_current_node->row == other_current_node->row && this_current_node->col == other_current_node->col) {
-				new_matrix[this_current_node->row][this_current_node->col] = this_current_node->val + other_current_node->val;
-				this_current_node = this_current_node->next;
-				other_current_node = other_current_node->next;
-			}
-			else if (this_current_node->row >= other_current_node->row || this_current_node->col >= other_current_node->col) {
-				new_matrix[other_current_node->row][other_current_node->col] = other_current_node->val;
-				other_current_node = other_current_node->next;
-			}
-			else if (this_current_node->row < other_current_node->row || this_current_node->col < other_current_node->col) {
-				new_matrix[this_current_node->row][this_current_node->col] = this_current_node->val;
-				this_current_node = this_current_node->next;
-			}
-		}
-
-		while (this_current_node != nullptr) {
-			new_matrix[this_current_node->row][this_current_node->col] = new_matrix[this_current_node->row][this_current_node->col] + this_current_node->val;
-			this_current_node = this_current_node->next;
-		}
+		new_matrix = this->add(this_current_node, other_current_node, max_row, max_col);
 	}
 	else if (this->num_elements < add_matrix.num_elements) {
-		while (this_current_node != nullptr) {
-			if (this_current_node->row == other_current_node->row && this_current_node->col == other_current_node->col) {
-				new_matrix[this_current_node->row][this_current_node->col] = this_current_node->val + other_current_node->val;
-				this_current_node = this_current_node->next;
-				other_current_node = other_current_node->next;
-			}
-			else if (this_current_node->row >= other_current_node->row || this_current_node->col >= other_current_node->col) {
-				new_matrix[this_current_node->row][this_current_node->col] = this_current_node->val;
-				this_current_node = this_current_node->next;
-			}
-			else if (this_current_node->row < other_current_node->row || this_current_node->col < other_current_node->col) {
-				new_matrix[other_current_node->row][other_current_node->col] = other_current_node->val;
-				other_current_node = other_current_node->next;
-			}
-		}
-
-		while (other_current_node != nullptr) {
-			new_matrix[other_current_node->row][other_current_node->col] = new_matrix[other_current_node->row][other_current_node->col] +  other_current_node->val;
-			other_current_node = other_current_node->next;
-		}
-	}
-	else {
-		while (this_current_node != nullptr && other_current_node != nullptr) {
-			if (this_current_node->row == other_current_node->row && this_current_node->col == other_current_node->col) {
-				new_matrix[this_current_node->row][this_current_node->col] = this_current_node->val + other_current_node->val;
-				this_current_node = this_current_node->next;
-				other_current_node = other_current_node->next;
-			}
-			else if (this_current_node->row >= other_current_node->row || this_current_node->col >= other_current_node->col) {
-				new_matrix[this_current_node->row][this_current_node->col] = this_current_node->val;
-				this_current_node = this_current_node->next;
-			}
-			else if (this_current_node->row < other_current_node->row || this_current_node->col < other_current_node->col) {
-				new_matrix[other_current_node->row][other_current_node->col] = other_current_node->val;
-				other_current_node = other_current_node->next;
-			}
-		}
+		new_matrix = this->add(other_current_node, this_current_node, max_row, max_col);
 	}
 
 	//Creates a sparse matrix from the new matrix
@@ -163,17 +123,14 @@ Sparse_Matrix Sparse_Matrix::insert_col(int col, std::vector<int> new_col) {
 }*/
 
 void Sparse_Matrix::print_matrix() {
-	Node* this_current_node = this->head;
-	int last_row = this_current_node->row;
-	int last_col = this_current_node->col;
+	Node* current_node = this->head;
 
-	//Need to modify while to match the circular linked list
-	while (this_current_node != nullptr) {
-		if (last_row == this_current_node->row) {
-			std::cout << this_current_node->val << " ";
-		}
-		else {
+	while (current_node != nullptr) {
+		std::cout << current_node->val << " ";
+
+		if (current_node->next != nullptr && current_node->next->row != current_node->row) {
 			std::cout << "\n";
 		}
+		current_node = current_node->next;
 	}
 }

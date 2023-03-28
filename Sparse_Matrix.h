@@ -12,6 +12,7 @@ private:
 	Node* tail;
 	int num_elements;
 	void decrement(std::string row_col, bool decrement);
+	std::vector<std::vector<int>> add(Node* current_node_longer, Node* current_node_shorter, int max_row, int max_col);
 public:
 	Sparse_Matrix();
 	Sparse_Matrix(std::vector<std::vector<int>> matrix);

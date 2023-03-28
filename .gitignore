@@ -10,10 +10,14 @@
 *.vcxproj.user
 *.vcxproj.*
 *.vcproj.*
-/VS Files
+/DSA Project.sln
 .vs/
 bin/
 obj/
+/Debug/
+/DSA Project
+/x64
+
 
 # CMake Files
 CMakeCache.txt
