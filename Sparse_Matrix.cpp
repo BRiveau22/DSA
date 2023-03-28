@@ -133,6 +133,31 @@ Sparse_Matrix Sparse_Matrix::multiply(Sparse_Matrix mult_matrix) {
 	return out_matrix;
 }
 
+void Sparse_Matrix::insert(int row, int col, int val) {
+	Node* current_node = this->head;
+
+	while (current_node->next != nullptr) {
+		if (current_node->next->row > row || (current_node->next->row == row && current_node->next->col > col)) {
+			current_node->next = new Node(row, col, val, current_node->next);
+			this->num_elements++;
+		}
+		current_node = current_node->next;
+	}
+
+	if (current_node->next == nullptr && current_node->row <= row || (current_node->row == row && current_node->col < col)) {
+		current_node->next = new Node(row, col, val);
+		this->num_elements++;
+	}
+	else if (current_node->next == nullptr && current_node->row > row || (current_node->row == row && current_node->col > col)) {
+		Node* new_node = new Node(row, col, val, current_node);
+		this->head = new_node;
+		this->num_elements++;
+	}
+	else if (current_node->next == nullptr && current_node->row == row && current_node->col == col) {
+		current_node->val = val;
+	}
+}
+
 /*Sparse_Matrix Sparse_Matrix::insert_row(int row, std::vector<int> new_row) {
 	//Inserts a new row at the specified index (with indexes < 0 prepending 
 	//the row, and indexes > num_rows appending the row)
