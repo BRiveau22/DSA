@@ -145,13 +145,13 @@ void Sparse_Matrix::insert(int row, int col, int val) {
 		current_node = current_node->next;
 	}
 
-	//Handles the case where the node is inserted at the tail
-	if (current_node->next == nullptr && current_node->row <= row || (current_node->row == row && current_node->col < col)) {
+	//Handles the case where the node is inserted at the tail or the head of an otherwise empty matrix
+	if (current_node->next == nullptr && (current_node->row <= row || (current_node->row == row && current_node->col < col))) {
 		current_node->next = new Node(row, col, val);
 		this->num_elements++;
 	}
 	//Handles the case where the node is inserted at the head of an otherwise empty matrix
-	else if (current_node->next == nullptr && current_node->row > row || (current_node->row == row && current_node->col > col)) {
+	else if (current_node == this->head && current_node->next == nullptr && (current_node->row > row || (current_node->row == row && current_node->col > col))) {
 		Node* new_node = new Node(row, col, val, current_node);
 		this->head = new_node;
 		this->num_elements++;
