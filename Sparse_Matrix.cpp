@@ -36,9 +36,32 @@ Sparse_Matrix::Sparse_Matrix(std::vector<std::vector<int>> matrix) {
 	}
 }
 
-//Private add
-std::vector<std::vector<int>> Sparse_Matrix::add(Node* current_node_longer, Node* current_node_shorter, int max_row, int max_col) {
+//Private Methods
+std::pair<int, int> Sparse_Matrix::get_max_row_col(Sparse_Matrix other) {
+	int max_row = 0;
+	int max_col = 0;
+
+	//Finds the max row and column of the two matrices
+	if (other.rows > this->rows) {
+		max_row = other.rows;
+	}
+	else {
+		max_row = this->rows;
+	}
+	if (other.cols > this->cols) {
+		max_col = other.cols;
+	}
+	else {
+		max_col = this->cols;
+	}
+
+	return { max_row, max_col };
+}
+
+std::vector<std::vector<int>> Sparse_Matrix::add(Sparse_Matrix longer, Sparse_Matrix shorter, int max_row, int max_col) {
 	std::vector<std::vector<int>> new_matrix(max_row, std::vector<int>(max_col, 0));
+	Node* current_node_longer = longer.head;
+	Node* current_node_shorter = shorter.head;
 
 	while (current_node_longer != nullptr) {
 		new_matrix[current_node_longer->row][current_node_longer->col] += current_node_longer->val;
@@ -53,45 +76,40 @@ std::vector<std::vector<int>> Sparse_Matrix::add(Node* current_node_longer, Node
 	return new_matrix;
 }
 
-/*Sparse_Matrix Sparse_Matrix::multiply(Sparse_Matrix mult_matrix) {
-	//Multiplies the current matrix by mult_matrix
-	//If there is a difference, assume adding zeroes to the matrix to make them match
+std::vector<std::vector<int>> Sparse_Matrix::multiply(Sparse_Matrix first, Sparse_Matrix second) {
+	std::vector<std::vector<int>> new_matrix(first.rows, std::vector<int>(second.cols, 0));
+	Node* current_node1 = first.head;
+	Node* current_node2 = second.head;
 
-	//Multiply every value in each row by every value in each column
-	//Take the summation of the multiplied values for the given row and column
-}*/
+	while (current_node1 != nullptr) {
+		while (current_node2 != nullptr) {
+			if (current_node1->col == current_node2->row) {
+				new_matrix[current_node1->row][current_node2->col] += current_node1->val * current_node2->val;
+			}
+			current_node2 = current_node2->next;
+		}
+		current_node1 = current_node1->next;
+		current_node2 = second.head;
+	}
 
+	return new_matrix;
+}
+
+//Public Methods
 Sparse_Matrix Sparse_Matrix::add(Sparse_Matrix add_matrix) {
-	int max_row = 0;
-	int max_col = 0;
-
-	//Finds the max row and column of the two matrices
-	if (add_matrix.rows > this->rows) {
-		max_row = add_matrix.rows;
-	}
-	else {
-		max_row = this->rows;
-	}
-	if (add_matrix.cols > this->cols) {
-		max_col = add_matrix.cols;
-	}
-	else {
-		max_col = this->cols;
-	}
+	std::pair<int, int> extremes = this->get_max_row_col(add_matrix);
+	int max_row = extremes.first;
+	int max_col = extremes.second;
 
 	//Creates a new 2D vector with the max row and column
 	std::vector<std::vector<int>> new_matrix;
-	
-	//Creates node pointers to the head of each matrix
-	Node* this_current_node = this->head;
-	Node* other_current_node = add_matrix.head;
 
-	//Current Sparse Matrices are created incorrectly
+	//Reassigns the new matrix to the sum of the two matrices
 	if (this->num_elements > add_matrix.num_elements) {
-		new_matrix = this->add(this_current_node, other_current_node, max_row, max_col);
+		new_matrix = this->add(*this, add_matrix, max_row, max_col);
 	}
-	else if (this->num_elements < add_matrix.num_elements) {
-		new_matrix = this->add(other_current_node, this_current_node, max_row, max_col);
+	else {
+		new_matrix = this->add(add_matrix, *this, max_row, max_col);
 	}
 
 	//Creates a sparse matrix from the new matrix
@@ -99,6 +117,21 @@ Sparse_Matrix Sparse_Matrix::add(Sparse_Matrix add_matrix) {
 	return out_matrix;
 }
 
+Sparse_Matrix Sparse_Matrix::multiply(Sparse_Matrix mult_matrix) {
+	std::pair<int, int> extremes = this->get_max_row_col(mult_matrix);
+	int max_row = extremes.first;
+	int max_col = extremes.second;
+
+	//Creates a new 2D vector with the max row and column
+	std::vector<std::vector<int>> new_matrix;
+
+	//Reassigns the new matrix to the product of the two matrices
+	new_matrix = this->multiply(*this, mult_matrix);
+
+	//Creates a sparse matrix from the new matrix
+	Sparse_Matrix out_matrix = Sparse_Matrix(new_matrix);
+	return out_matrix;
+}
 
 /*Sparse_Matrix Sparse_Matrix::insert_row(int row, std::vector<int> new_row) {
 	//Inserts a new row at the specified index (with indexes < 0 prepending 
