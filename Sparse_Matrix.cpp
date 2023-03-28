@@ -158,28 +158,6 @@ void Sparse_Matrix::insert(int row, int col, int val) {
 	}
 }
 
-/*Sparse_Matrix Sparse_Matrix::insert_row(int row, std::vector<int> new_row) {
-	//Inserts a new row at the specified index (with indexes < 0 prepending 
-	//the row, and indexes > num_rows appending the row)
-	
-	//Create node pointers for every value in new_row
-	//Switch pointers from row before insertion index to the start value of new_row
-	//Switch pointers from new_row to next_row
-
-}
-
-Sparse_Matrix Sparse_Matrix::insert_col(int col, std::vector<int> new_col) {
-	//Inserts a new col at the specified index (with indexes < 0 prepending 
-	//the col, and indexes > col appending the row)
-
-	//Create node pointers for every value in new_col
-	//Loop through every value in the Sparse_Matrix
-	//When current_col is less than the insertion index, insert first value
-	//Point to new value
-	//Point from new value to next value
-	//Repeat until all columns are filled
-}*/
-
 void Sparse_Matrix::print_matrix() {
 	Node* current_node = this->head;
 

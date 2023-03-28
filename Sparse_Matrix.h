@@ -21,7 +21,5 @@ public:
 	Sparse_Matrix multiply(Sparse_Matrix mult_matrix);
 	Sparse_Matrix add(Sparse_Matrix add_matrix);
 	void insert(int row, int col, int val);
-	Sparse_Matrix insert_row(int row, std::vector<int> new_row);
-	Sparse_Matrix insert_col(int col, std::vector<int> new_col);
 	void print_matrix();
 };
