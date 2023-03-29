@@ -96,12 +96,6 @@ std::vector<std::vector<int>> Sparse_Matrix::multiply(Sparse_Matrix first, Spars
 
 //Public Methods
 Sparse_Matrix Sparse_Matrix::add(Sparse_Matrix add_matrix) {
-    //Returns 0 if matrices have different dimensions
-    if(this->rows != add_matrix.rows || this->cols != add_matrix.cols){
-        std::vector<std::vector<int>> empty_matrix(1, std::vector<int>(1, 0));
-        return empty_matrix;
-    }
-
 	std::pair<int, int> extremes = this->get_max_row_col(add_matrix);
 	int max_row = extremes.first;
 	int max_col = extremes.second;
