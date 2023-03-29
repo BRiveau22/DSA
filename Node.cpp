@@ -27,3 +27,15 @@ Node::~Node() {
         delete this->next;
     }
 }
+
+int Node::getVal(){
+    return this->val;
+};
+
+int Node::getCol(){
+    return this->col;
+};
+
+Node* Node::getNext(){
+    return this->next;
+};

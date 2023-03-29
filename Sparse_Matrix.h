@@ -18,7 +18,9 @@ public:
 	Sparse_Matrix();
 	Sparse_Matrix(std::vector<std::vector<int>> matrix);
 	Sparse_Matrix multiply(Sparse_Matrix mult_matrix);
-	Sparse_Matrix add(Sparse_Matrix add_matrix);
+    Sparse_Matrix add(Sparse_Matrix add_matrix);
 	void insert(int row, int col, int val);
 	void print_matrix();
+    Node* getHead();
+
 };

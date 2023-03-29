@@ -175,3 +175,8 @@ void Sparse_Matrix::print_matrix() {
 		current_node = current_node->next;
 	}
 }
+
+Node* Sparse_Matrix::getHead(){
+    return this->head;
+};
+

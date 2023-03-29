@@ -14,4 +14,7 @@ public:
     Node(int row,int col,int val);
     Node(int row,int col,int val,Node* next);
     ~Node();
+    int getVal();
+    int getCol();
+    Node* getNext();
 };
