@@ -56,19 +56,20 @@ std::pair<int, int> Sparse_Matrix::get_max_row_col(Sparse_Matrix other) {
 	return { max_row, max_col };
 }
 
-std::vector<std::vector<int>> Sparse_Matrix::add(Sparse_Matrix longer, Sparse_Matrix shorter, int max_row, int max_col) {
-	std::vector<std::vector<int>> new_matrix(max_row, std::vector<int>(max_col, 0));
-	Node* current_node_longer = longer.head;
-	Node* current_node_shorter = shorter.head;
+std::vector<std::vector<int>> Sparse_Matrix::add(Sparse_Matrix first, Sparse_Matrix second, int max_row, int max_col) {
 
-	while (current_node_longer != nullptr) {
-		new_matrix[current_node_longer->row][current_node_longer->col] += current_node_longer->val;
-		current_node_longer = current_node_longer->next;
+	std::vector<std::vector<int>> new_matrix(max_row, std::vector<int>(max_col, 0));
+	Node* current_node_first = first.head;
+	Node* current_node_second = second.head;
+
+	while (current_node_first != nullptr) {
+		new_matrix[current_node_first->row][current_node_first->col] += current_node_first->val;
+		current_node_first = current_node_first->next;
 	}
 
-	while (current_node_shorter != nullptr) {
-		new_matrix[current_node_shorter->row][current_node_shorter->col] += current_node_shorter->val;
-		current_node_shorter = current_node_shorter->next;
+	while (current_node_second != nullptr) {
+		new_matrix[current_node_second->row][current_node_second->col] += current_node_second->val;
+		current_node_second = current_node_second->next;
 	}
 
 	return new_matrix;
@@ -95,6 +96,12 @@ std::vector<std::vector<int>> Sparse_Matrix::multiply(Sparse_Matrix first, Spars
 
 //Public Methods
 Sparse_Matrix Sparse_Matrix::add(Sparse_Matrix add_matrix) {
+    //Returns 0 if matrices have different dimensions
+    if(this->rows != add_matrix.rows || this->cols != add_matrix.cols){
+        std::vector<std::vector<int>> empty_matrix(1, std::vector<int>(1, 0));
+        return empty_matrix;
+    }
+
 	std::pair<int, int> extremes = this->get_max_row_col(add_matrix);
 	int max_row = extremes.first;
 	int max_col = extremes.second;
