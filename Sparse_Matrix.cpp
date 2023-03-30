@@ -56,11 +56,10 @@ std::pair<int, int> Sparse_Matrix::get_max_row_col(Sparse_Matrix other) {
 	return { max_row, max_col };
 }
 
-std::vector<std::vector<int>> Sparse_Matrix::add(Sparse_Matrix first, Sparse_Matrix second, int max_row, int max_col) {
-
+std::vector<std::vector<int>> Sparse_Matrix::add(Sparse_Matrix longer, Sparse_Matrix shorter, int max_row, int max_col) {
 	std::vector<std::vector<int>> new_matrix(max_row, std::vector<int>(max_col, 0));
-	Node* current_node_first = first.head;
-	Node* current_node_second = second.head;
+	Node* current_node_first = longer.head;
+	Node* current_node_second = shorter.head;
 
 	while (current_node_first != nullptr) {
 		new_matrix[current_node_first->row][current_node_first->col] += current_node_first->val;
