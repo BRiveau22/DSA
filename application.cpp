@@ -32,7 +32,7 @@
 
 // Displays the home user interface
 void Generate_HomeUI(){
-    std::cout << "What would you like to do?\n1. Find my most targeted ad for the week\n2. Display file requirements\n6. Exit Application\n";
+    std::cout << "What would you like to do?\n1. Find my most targeted ad for the week\n2. Find my most targeted ad for multiple weeks\n3. Display file requirements\n6. Exit Application\n";
 }
 
 //Displays requirements of input matrix file
@@ -70,6 +70,7 @@ void week_target(){
     //Creates sparse matrix from the data
     Sparse_Matrix week = Sparse_Matrix(data);
 
+
     // Categories vector
     std::vector<std::string> cats = {"News","Music","Art","Sports","Medical","Food","Cars","Video Games","Technology","Politics","Movies/Shows","Vacations"};
 
@@ -94,7 +95,66 @@ void week_target(){
     }
 
     //Displays results
-    std::cout << "You would be most commonly targeted with ads related to " << cats[most_index-1] << "\n\n";
+    std::cout << "You would be most commonly targeted with ads related to " << cats[most_index] << " this week.\n\n";
+
+}
+
+//Displays ads that will be most commonly displayed from a week of data
+void mult_weeks_target(){
+
+    //Gets amount of weeks to be added together from user
+    std::cout << "Enter the amount of weeks you would like to analyze:" << std::endl;
+    int num_weeks = 0;
+    std::cin >> num_weeks;
+
+    //Creates initial empty sparse matrix of zeros
+    //std::vector<std::vector<int>> empty_data(7, std::vector<int>(12, 0));
+    Sparse_Matrix result_matrix =  Sparse_Matrix();
+
+
+
+    for(int i=0; i<num_weeks; i++){
+        std::cout << "\nEnter the file name that stores your 7x12 matrix of visited site categories" << std::endl;
+
+        //Gets file name from user
+        std::string fname;
+        std::cin >> fname;
+
+        //Converts file data to a 2d vector
+        std::vector<std::vector<int>> data = fto2d(fname);
+
+        //Creates sparse matrix from the data
+        Sparse_Matrix week = Sparse_Matrix(data);
+
+        //Adds current week data to result matrix using matrix division
+        result_matrix = week.add(result_matrix);
+    }
+
+    // Categories vector
+    std::vector<std::string> cats = {"News","Music","Art","Sports","Medical","Food","Cars","Video Games","Technology","Politics","Movies/Shows","Vacations"};
+
+    // Empty vector to hold cumulative scores for each category
+    std::vector<int> visits = std::vector<int>(12, 0);
+
+    //Starts at the head node
+    Node* current_node = result_matrix.getHead();
+
+    //Adds all values to the visits vector
+    while(current_node != nullptr){
+        visits[current_node->getCol()] += current_node->getVal();
+        current_node = current_node->getNext();
+    }
+
+    //Finds category with most visits
+    int most_index=0;
+    for(int i=0; i<visits.size(); i++){
+        if(visits[i]>visits[most_index]){
+            most_index = i;
+        }
+    }
+
+    //Displays results
+    std::cout << "You would be most commonly targeted with ads related to " << cats[most_index] << " over these " << num_weeks << " weeks.\n\n";
 
 }
 
@@ -104,6 +164,9 @@ void Home_Input_Handler(int choice){
         week_target();
     }
     else if(choice == 2){
+        mult_weeks_target();
+    }
+    else if(choice == 3){
         file_reqs();
     }
 

@@ -12,6 +12,8 @@ Sparse_Matrix::Sparse_Matrix(std::vector<std::vector<int>> matrix) {
 	Node* current_node = new Node();
 	this->head = current_node;
 	this->num_elements = 0;
+    this->rows = matrix.size();
+    this->cols = matrix[0].size();
 
 	for (int y = 0; y < matrix.size(); y++) {
 		for (int x = 0; x < matrix[y].size(); x++) {
@@ -24,13 +26,16 @@ Sparse_Matrix::Sparse_Matrix(std::vector<std::vector<int>> matrix) {
 
 			if (y == matrix.size() - 1 && x == matrix[y].size() - 1) {
 				this->tail = current_node;
-				this->rows = this->tail->row + 1;
-				this->cols = this->tail->col + 1;
+                //Edited out by connor, to discuss later, replaced in conditional above
+				//this->rows = this->tail->row + 1;
+				//this->cols = this->tail->col + 1;
+
 			}
 			else {
 				current_node->next = new Node();
 				current_node = current_node->next;
 			}
+
 		}
 	}
 }
@@ -39,6 +44,7 @@ Sparse_Matrix::Sparse_Matrix(std::vector<std::vector<int>> matrix) {
 std::pair<int, int> Sparse_Matrix::get_max_row_col(Sparse_Matrix other) {
 	int max_row = 0;
 	int max_col = 0;
+
 
 	if (other.rows > this->rows) {
 		max_row = other.rows;
@@ -57,7 +63,7 @@ std::pair<int, int> Sparse_Matrix::get_max_row_col(Sparse_Matrix other) {
 }
 
 std::vector<std::vector<int>> Sparse_Matrix::add(Sparse_Matrix longer, Sparse_Matrix shorter, int max_row, int max_col) {
-	std::vector<std::vector<int>> new_matrix(max_row, std::vector<int>(max_col, 0));
+	std::vector<std::vector<int>> new_matrix(max_row+1, std::vector<int>(max_col+1, 0));
 	Node* current_node_first = longer.head;
 	Node* current_node_second = shorter.head;
 
@@ -166,7 +172,10 @@ void Sparse_Matrix::print_matrix() {
 	Node* current_node = this->head;
 
 	while (current_node != nullptr) {
-		std::cout << current_node->val << " ";
+        if(current_node->val != 0){
+            std::cout << current_node->val << " ";
+        }
+
 
 		if (current_node->next != nullptr && current_node->next->row != current_node->row) {
 			std::cout << "\n";
