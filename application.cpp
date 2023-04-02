@@ -1,5 +1,6 @@
-#include "application.h"
 #include "Sparse_Matrix.h"
+#include <iostream>
+#include <fstream>
 
 //This application replicates an ad targeting algorithm
 /*
