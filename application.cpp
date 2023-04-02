@@ -173,12 +173,10 @@ void Home_Input_Handler(int choice){
 }
 
 
-
-
 int main(int argc, char* argv[]) {
     std::cout << "Welcome to our ad targeting application!\n";
 
-    int choice;
+    int choice = -1;
     while(choice != 6){
         Generate_HomeUI();
         std::cin >> choice;
