@@ -48,7 +48,6 @@ std::pair<int, int> Sparse_Matrix::get_max_row_col(Sparse_Matrix other) {
 	int max_row = 0;
 	int max_col = 0;
 
-
 	if (other.rows > this->rows) {
 		max_row = other.rows;
 	}
