@@ -42,6 +42,7 @@ void file_reqs(){
 std::cout << "Each row is a new day (7 rows for days in a week per file)\nEach column is an ad category(12 in total)\nCol 1: News\nCol 2: Music\nCol 3: Art\nCol 4: Sports\nCol 5: Medical\nCol 6: Food\nCol 7: Cars\nCol 8: Video Games\nCol 9: Technology\nCol 10: Politics\nCol 11: Movies/Shows\nCol 12: Vacations\n\nHere is an example matrix:\n0 1 0 0 5 0 3 0 0 0 1 0\n1 1 0 0 4 0 1 0 0 0 0 0\n0 0 0 1 2 0 0 1 1 0 0 0\n1 0 0 2 0 0 4 0 0 0 0 0\n0 0 0 0 2 0 1 0 0 1 0 1\n0 2 0 1 0 3 0 0 0 4 0 0\n3 0 0 0 1 1 0 0 0 0 3 0\n\n";
 
 }
+
 // Returns a 2d vector of all the file data
 std::vector<std::vector<int>> fto2d(std::string fname){
     std::ifstream in_file(fname);
@@ -69,7 +70,7 @@ void week_target(){
     std::vector<std::vector<int>> data = fto2d(fname);
 
     //Creates sparse matrix from the data
-    Sparse_Matrix week = Sparse_Matrix(data);
+    Sparse_Matrix week(data);
 
 
     // Categories vector
