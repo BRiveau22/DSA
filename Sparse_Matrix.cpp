@@ -12,8 +12,8 @@ Sparse_Matrix::Sparse_Matrix(std::vector<std::vector<int>> matrix) {
 	Node* current_node = new Node();
 	this->head = current_node;
 	this->num_elements = 0;
-    this->rows = matrix.size();
-    this->cols = matrix[0].size();
+	this->rows = 0;
+	this->cols = 0;
 
 	for (int y = 0; y < matrix.size(); y++) {
 		for (int x = 0; x < matrix[y].size(); x++) {
@@ -26,16 +26,19 @@ Sparse_Matrix::Sparse_Matrix(std::vector<std::vector<int>> matrix) {
 
 			if (y == matrix.size() - 1 && x == matrix[y].size() - 1) {
 				this->tail = current_node;
-                //Edited out by connor, to discuss later, replaced in conditional above
-				//this->rows = this->tail->row + 1;
-				//this->cols = this->tail->col + 1;
-
 			}
+
+			if (current_node->row > this->rows) {
+				this->rows = current_node->row;
+			}
+			if (current_node->col > this->cols) {
+				this->cols = current_node->col;
+			}
+
 			else {
 				current_node->next = new Node();
 				current_node = current_node->next;
 			}
-
 		}
 	}
 }
