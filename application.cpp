@@ -160,6 +160,8 @@ void mult_weeks_target(){
 
 }
 
+//Create Method to determine relative frequency of each category
+
 //Handles the users choice from the home menu
 void Home_Input_Handler(int choice){
     if(choice == 1){
