@@ -1,7 +1,7 @@
 # DSA
 This repository houses our Data Structures Assignment for CSC 212 at URI, which focuses on sparse matrices and linked lists.
 
-Compile Instructions:
+Compilation Instructions:
 In order to compile the program, you must have the GNU C++ compiler installed on your machine. If you do not have it installed, you can download it here: https://gcc.gnu.org/install/binaries.html
 
 1.) Download the repository to your machine.
