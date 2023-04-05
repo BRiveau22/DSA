@@ -1,7 +1,9 @@
 # DSA
 Group Members: James Allen, Benjamin Corriveau, Grant Garcia, and Connor Stubbs
 
-Summary: This project is an interactive application, written in C++, that allows users to interact with sparse matrices to view information about advertisements that will be shown to them based on their previous online activity. In order to do this, sparse matrices are used to store data on how many times the user interacted with content in the given category, and is tracked across one week per sparse matrix.
+Summary: 
+
+This project is an interactive application, written in C++, that allows users to interact with sparse matrices to view information about advertisements that will be shown to them based on their previous online activity. In order to do this, sparse matrices are used to store data on how many times the user interacted with content in the given category, and is tracked across one week per sparse matrix.
 
 Planning: 
 1.) Write the scaffolding for the application (Node.cpp, Node.h, Sparse_Matrix.cpp, Sparse_Matrix.h, and application.cpp).
@@ -49,6 +51,7 @@ Planning:
 5.) Write compilation and runtime instructions.
 
 Compilation Instructions:
+
 In order to compile the program, you must have the GNU C++ compiler installed on your machine. If you do not have it installed, you can download it here: https://gcc.gnu.org/install/binaries.html
 
 1.) Download the repository to your machine.
