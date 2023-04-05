@@ -32,7 +32,7 @@
  */
 
 // Displays the home user interface
-void Generate_HomeUI(){
+void generate_home_ui(){
     std::cout << "What would you like to do?\n1. Find my most targeted ad for the week\n2. Find my most targeted ad for multiple weeks\n3. Display file requirements\n6. Exit Application\n";
 }
 
@@ -80,12 +80,12 @@ void week_target(){
     std::vector<int> visits = std::vector<int>(12, 0);
 
     //Starts at the head node
-    Node* current_node = week.getHead();
+    Node* current_node = week.get_head();
 
     //Adds all values to the visits vector
     while(current_node != nullptr){
-        visits[current_node->getCol()] += current_node->getVal();
-        current_node = current_node->getNext();
+        visits[current_node->get_col()] += current_node->get_val();
+        current_node = current_node->get_next();
     }
 
     //Finds category with most visits
@@ -139,12 +139,12 @@ void mult_weeks_target(){
     std::vector<int> visits = std::vector<int>(12, 0);
 
     //Starts at the head node
-    Node* current_node = result_matrix.getHead();
+    Node* current_node = result_matrix.get_head();
 
     //Adds all values to the visits vector
     while(current_node != nullptr){
-        visits[current_node->getCol()] += current_node->getVal();
-        current_node = current_node->getNext();
+        visits[current_node->get_col()] += current_node->get_val();
+        current_node = current_node->get_next();
     }
 
     //Finds category with most visits
@@ -163,7 +163,7 @@ void mult_weeks_target(){
 //Create Method to determine relative frequency of each category
 
 //Handles the users choice from the home menu
-void Home_Input_Handler(int choice){
+void home_input_handler(int choice){
     if(choice == 1){
         week_target();
     }
@@ -182,9 +182,9 @@ int main(int argc, char* argv[]) {
 
     int choice = -1;
     while(choice != 6){
-        Generate_HomeUI();
+        generate_home_ui();
         std::cin >> choice;
-        Home_Input_Handler(choice);
+        home_input_handler(choice);
     }
     std::cout << "Thank you for trying our application!";
 }

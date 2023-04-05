@@ -21,6 +21,6 @@ public:
     Sparse_Matrix add(Sparse_Matrix add_matrix);
 	void insert(int row, int col, int val);
 	void print_matrix();
-    Node* getHead();
+    Node* get_head();
 
 };

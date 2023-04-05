@@ -186,7 +186,7 @@ void Sparse_Matrix::print_matrix() {
 	}
 }
 
-Node* Sparse_Matrix::getHead(){
+Node* Sparse_Matrix::get_head(){
     return this->head;
 };
 

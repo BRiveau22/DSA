@@ -28,14 +28,14 @@ Node::~Node() {
     }
 }
 
-int Node::getVal(){
+int Node::get_val(){
     return this->val;
 };
 
-int Node::getCol(){
+int Node::get_col(){
     return this->col;
 };
 
-Node* Node::getNext(){
+Node* Node::get_next(){
     return this->next;
 };
