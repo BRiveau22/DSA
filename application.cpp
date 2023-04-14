@@ -33,7 +33,7 @@
 
 // Displays the home user interface
 void generate_home_ui(){
-    std::cout << "What would you like to do?\n1. Find my most targeted ad for the week\n2. Find my most targeted ad for multiple weeks\n3. Display file requirements\n6. Exit Application\n";
+    std::cout << "What would you like to do?\n1. Find my most targeted ad for the week\n2. Find my most targeted ad for multiple weeks\n3. Find most targetd ad based on weights\n4. Display file requirements\n5. Exit Application\n";
 }
 
 //Displays requirements of input matrix file
@@ -161,6 +161,9 @@ void mult_weeks_target(){
 }
 
 //Create Method to determine relative frequency of each category
+void weighted_target(){
+
+};
 
 //Handles the users choice from the home menu
 void home_input_handler(int choice){
@@ -171,7 +174,13 @@ void home_input_handler(int choice){
         mult_weeks_target();
     }
     else if(choice == 3){
+        weighted_target();
+    }
+    else if(choice == 4){
         file_reqs();
+    }
+    else{
+        std::cout << "Invalid choice, try again.\n" << std::endl;
     }
 
 }
@@ -181,7 +190,7 @@ int main(int argc, char* argv[]) {
     std::cout << "Welcome to our ad targeting application!\n";
 
     int choice = -1;
-    while(choice != 6){
+    while(choice != 5){
         generate_home_ui();
         std::cin >> choice;
         home_input_handler(choice);
