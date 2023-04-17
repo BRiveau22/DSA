@@ -179,6 +179,9 @@ void home_input_handler(int choice){
     else if(choice == 4){
         file_reqs();
     }
+    else if (choice == 5) {
+		return;
+	}
     else{
         std::cout << "Invalid choice, try again.\n" << std::endl;
     }
