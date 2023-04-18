@@ -33,7 +33,7 @@
 
 // Displays the home user interface
 void generate_home_ui(){
-    std::cout << "What would you like to do?\n1. Find my most targeted ad for the week\n2. Find my most targeted ad for multiple weeks\n3. Find most targetd ad based on weights\n4. Display file requirements\n5. Exit Application\n";
+    std::cout << "What would you like to do?\n1. Find my most targeted ad for the week\n2. Find my most targeted ad for multiple weeks\n3. Find most targeted ad based on weights\n4. Display file requirements\n5. Exit Application\n";
 }
 
 //Displays requirements of input matrix file
