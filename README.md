@@ -59,16 +59,20 @@ In order to provide the most flexibility with this data structure, we decided th
 
 Sparse Matrix Private Methods:
 <img width="418" alt="Screenshot 2023-04-18 151627" src="https://user-images.githubusercontent.com/123384354/232888442-7944d1e7-c66c-4eb2-823c-b482c5211a62.png">
+
 The get_max_row_col method accepts a sparse matrix as a parameter and finds the maximum row and column between the current sparse matrix and the one passed in as an argument. This data is then combined to form a pair, that is returned.
 
 <img width="530" alt="Screenshot 2023-04-18 150654" src="https://user-images.githubusercontent.com/123384354/232889243-92480105-1db2-4fab-a011-c82a5ac5cef3.png">
+
 The private add method creates an empty 2D vector of size max_row by max_col and fills it with 0s. Then, the two sparse matrices (the smaller of the two first) are then iterated through, taking the sum of the current value at the given row and column and the value held in the newly created 2D vector. A similar method is used for the private multiply method, however, the new matrix is created of size first matrix.rows by second matrix.columns. In addition to this, the multiply method multiplies the values in the two matrices if the row and column match, which is then added to the empty matrix.
 
 Sparse Matrix Public Methods:
 <img width="412" alt="Screenshot 2023-04-18 151112" src="https://user-images.githubusercontent.com/123384354/232886242-33fe4f17-05a6-4a3a-8766-2299d820473e.png">
+
 The add method accepts a second sparse matrix as a parameter and will take the sum of the two matrices. It does this by getting the max row and max column of the two sparse matrices (using the private get_max_row_col method), and then passing these values to the private add method, where all of the main logic is housed. This will return a 2D vector that is then used with the second constructor to create a new sparse matrix that is returned. The multiply method operates similarly, but does not find the max row and column of the two sparse matrices.
 
 <img width="567" alt="Screenshot 2023-04-18 151354" src="https://user-images.githubusercontent.com/123384354/232887537-c8eaffd6-4004-4808-9d87-0b6133254ab6.png">
+
 The insert method accepts a row, column, and value and inserts this value into the linked list representation of the sparse matrix based on the row and column of the value to be inserted. This is accomplished according to the way in which nodes are inserted into a linked list. After this is completed, the head and tail are reassigned to the inserted node (if necessary). The print_matrix method iterates through the current matrix and prints all values within the sparse matrix to the console.
 
 Compilation Instructions:
