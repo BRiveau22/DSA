@@ -6,6 +6,7 @@ Summary:
 This project is an interactive application, written in C++, that allows users to interact with sparse matrices to view information about advertisements that will be shown to them based on their previous online activity. In order to do this, sparse matrices are used to store data on how many times the user interacted with content in the given category, and is tracked across one week per sparse matrix.
 
 Planning: 
+
 1.) Write the scaffolding for the application (Node.cpp, Node.h, Sparse_Matrix.cpp, Sparse_Matrix.h, and application.cpp).
 
 	a.) Node.cpp and Node.h will be used to create the nodes that will be used to create the sparse matrices (our implementation utilizes linked lists to represent sparse matrices).
