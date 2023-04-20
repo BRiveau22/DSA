@@ -197,15 +197,15 @@ void weighted_target(){
     }
 
     for(int j = 0; j < 12; j++){
-        VCount[j] = floor(VCount[j] / total) * 100;
+        VCount[j] = floor((VCount[j] / total)*100);
     }
 
     //display results
-    std::cout << "\nThe chance of each subject appearing is as follows:" << std::endl;
+    std::cout << "\nThe percent chance of each subject appearing is as follows:" << std::endl;
 
     std::cout << "\nNews: " << VCount[0] << "\nMusic: " << VCount[1] << "\nArt: " << VCount[2]
               << "\nSports: " << VCount[3] << "\nMedical: " << VCount[4] << "\nFood: " << VCount[5]
-              << "\nCars: " << VCount[6] << "\nVideo Games: " << VCount[7] << "\nTechnology" << VCount[8]
+              << "\nCars: " << VCount[6] << "\nVideo Games: " << VCount[7] << "\nTechnology: " << VCount[8]
               << "\nPolitics: " << VCount[9] << "\nMovies/Shows: " << VCount[10] << "\nVacations: " << VCount[11] << "\n\n" << std::endl;
 
 };
