@@ -27,3 +27,7 @@ cmake_install.cmake
 install_manifest.txt
 Makefile
 /out
+
+# Compiled Files
+*.out
+*.exe
