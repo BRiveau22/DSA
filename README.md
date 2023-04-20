@@ -79,6 +79,35 @@ The add method accepts a second sparse matrix as a parameter and will take the s
 
 The insert method accepts a row, column, and value and inserts this value into the linked list representation of the sparse matrix based on the row and column of the value to be inserted. This is accomplished according to the way in which nodes are inserted into a linked list. After this is completed, the head and tail are reassigned to the inserted node (if necessary). The print_matrix method iterates through the current matrix and prints all values within the sparse matrix to the console.
 
+## Application Methods:
+<img width="504" alt="Screen Shot 2023-04-20 at 5 31 40 PM" src="https://user-images.githubusercontent.com/123471864/233492341-f127a635-6d51-4a3a-a4e3-fcb0d804e38a.png">
+
+<img width="455" alt="home_ui" src="https://user-images.githubusercontent.com/123471864/233492091-91cf7e22-e699-4598-8941-f16e1dd11241.png">
+
+The application begins with the main function which welcomes the user to the application and then starts a while loop that runs until the user inputs 5 to exit the application. Inside of this while loop our generate_home_ui function is called. This function simply outputs the 5 options that the user has to choose from which are finding their most targeted ad for the week, finding their most targeted ad over multiple weeks, finding their most targeted ad in a week based on weights for each category, displaying the file requirements for the sparse matrix input file, and finally to exit the application.
+
+<img width="538" alt="Screen Shot 2023-04-20 at 5 32 55 PM" src="https://user-images.githubusercontent.com/123471864/233492551-28229c15-d314-4b0a-86d2-2dbeef6d6e0e.png">
+
+Next, the user inputs their choice which is passed into our home_input_handler which calls the function that corresponds with the user's choice or prompts the user to try again if they input an option other than 1-5.
+
+<img width="489" alt="fqs" src="https://user-images.githubusercontent.com/123471864/233492789-9e89ab54-7e80-47e1-bc18-394ac60b61a7.png">
+
+A great option for the user to use before using our application is the file requirements choice which calls out function file_reqs. This function prints out the requirements for the users input file which simply states the file must be a 7x12 matrix where the rows are days(7 for a week) and the columns are the 12 categories of websites that we chose for our basic application (Col 1: News, Col 2: Music, Col 3: Art, Col 4: Sports, Col 5: Medical, Col 6: Food, Col 7: Cars, Col 8: Video Games, Col 9: Technology, Col 10: Politics, Col 11: Movies/Shows, and Col 12: Vacations).
+
+<img width="698" alt="fto2d" src="https://user-images.githubusercontent.com/123471864/233492936-c4b13727-c2ca-48af-b4df-c0c06556672a.png">
+
+The function fto2d is a helper function that takes the input file name as a parameter, puts the matrix data into a 2-dimensional vector, and then returns the 2-dimensional vector. This function operates by creating a 7x12 2-dimensional vector filled with zeroes, opening a file stream using the file name, and then adding every corresponding value from the input file to the 2-dimensional vector in a nested for loop. After the entire file is iterated through the 2-dimensional vector is returned. This function is very convenient because it allows for a 2-dimensional vector of the file data to be passed into the Sparse_Matrix constructor.
+
+<img width="1259" alt="Screen Shot 2023-04-20 at 5 38 20 PM" src="https://user-images.githubusercontent.com/123471864/233493366-a6ade3f1-dbbb-4fec-ae96-e380ba2fe9c2.png">
+
+If the user selects choice 1, the week_target function is called. This function begins by asking the user to input the file name that stores their data and then gets a 2-dimensional vector of the data by calling the fto2d helper function. Next, a sparse matrix using linked lists for the week's data is created by passing in the 2-dimensional vector and a vector of the 12 categories named cats is declared. Afterwards, an empty vector with integers set to 0 is declared to hold the number of visits per category and a node pointer is declared to point to the head of our linked list that represents the sparse matrix. A for loop then iterates throughout the entire linked list and adds the values of that pertain to each category to the visits vector. Finally, the greatest number of visits index is found and the ad category that the user would most likely be targeted with due to frequency of visits is printed to the console. 
+
+<img width="1257" alt="Screen Shot 2023-04-20 at 5 40 22 PM" src="https://user-images.githubusercontent.com/123471864/233493618-7a754015-675a-498c-a57e-bc9e070a4f3f.png">
+<img width="1230" alt="Screen Shot 2023-04-20 at 5 41 05 PM" src="https://user-images.githubusercontent.com/123471864/233493709-21df1685-b8b4-4fdd-8214-efd7bdf66c55.png">
+
+Similar to the week_target function, is the mult_weeks_target function. This function does practically the same thing as the week_target function except it prompts the user for the number of weeks to be analyzed and then asks the user for the name of input files for however many weeks were previously indicated. All of these values are added to a result matrix and then the most likely to be targeted ad category among all of the weeks is printed to the console. 
+
+
 # Compilation Instructions:
 
 In order to compile the program, you must have the GNU C++ compiler installed on your machine. If you do not have it installed, you can download it here: https://gcc.gnu.org/install/binaries.html
