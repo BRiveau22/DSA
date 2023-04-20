@@ -56,6 +56,8 @@ std::vector<std::vector<int>> fto2d(std::string fname){
         }
     }
 
+    in_file.close();
+
     return data_vector;
 }
 
