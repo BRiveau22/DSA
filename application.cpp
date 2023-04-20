@@ -48,6 +48,15 @@ std::cout << "Each row is a new day (7 rows for days in a week per file)\nEach c
 // Returns a 2d vector of all the file data
 std::vector<std::vector<int>> fto2d(std::string fname){
     std::ifstream in_file(fname);
+
+    while (!in_file) {
+        std::cout << "File does not exist. Please enter a valid file name." << std::endl;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cin >> fname;
+        in_file.open(fname);
+    }
+
     std::vector<std::vector<int>> data_vector(7, std::vector<int>(12, 0));
 
     for(int row = 0; row<7; row++){
@@ -63,7 +72,7 @@ std::vector<std::vector<int>> fto2d(std::string fname){
 
 
 //Displays ads that will be most commonly displayed from a week of data
-void week_target(){
+void week_target() {
     std::cout << "Enter the file name that stores your 7x12 matrix of visited site categories" << std::endl;
 
     //Gets file name from user
@@ -118,7 +127,6 @@ void mult_weeks_target(){
     std::cin >> num_weeks;
 
     //Creates initial empty sparse matrix of zeros
-    //std::vector<std::vector<int>> empty_data(7, std::vector<int>(12, 0));
     Sparse_Matrix result_matrix =  Sparse_Matrix();
 
 
