@@ -1,6 +1,7 @@
 #include "Sparse_Matrix.h"
 #include <iostream>
 #include <fstream>
+#include <cmath>
 
 //This application replicates an ad targeting algorithm
 /*
@@ -162,6 +163,52 @@ void mult_weeks_target(){
 
 //Create Method to determine relative frequency of each category
 void weighted_target(){
+
+//Gets amount of weeks to be averaged to find the frequency
+    std::cout << "Enter the amount of weeks you would like to analyze:" << std::endl;
+    int num_weeks = 0;
+    std::cin >> num_weeks;
+    float total = 0.0;
+    //empty vector for each of the ad categories
+    std::vector<int> visits = std::vector<int>(12, 0);
+
+    //loops through each week given
+    for(int i=0; i<num_weeks; i++){
+
+        std::cout << "\nInput the name of the file that stores your 7x12 matrix of visited ad site categories" << std::endl;
+
+        //Gets file name from user
+        std::string fname;
+        std::cin >> fname;
+
+        //turns file data into a 2d vector
+        std::vector<std::vector<int>> data = fto2d(fname);
+
+        //uses the data to create a sparse matrix
+        Sparse_Matrix week = Sparse_Matrix(data);
+
+        Node* current_node = week.get_head();
+
+        while(current_node != nullptr){
+            visits[current_node->get_col()] += current_node->get_val();
+            total += current_node->get_val();
+            current_node = current_node->get_next();
+        }
+    }
+
+    for(int j = 0; j < 12; j++){
+        visits[j] = floor(visits[j] / total) * 100;
+    }
+
+
+
+    //display results
+    std::cout << "\nThe chance of each subject appearing is as follows:" << std::endl;
+
+    std::cout << "\nNews: " << visits[0] << "\nMusic: " << visits[1] << "\nArt: " << visits[2]
+              << "\nSports: " << visits[3] << "\nMedical: " << visits[4] << "\nFood: " << visits[5]
+              << "\nCars: " << visits[6] << "\nVideo Games: " << visits[7] << "\nTechnology" << visits[8]
+              << "\nPolitics: " << visits[9] << "\nMovies/Shows: " << visits[10] << "\nVacations: " << visits[0] << "\n\n" << std::endl;
 
 };
 
