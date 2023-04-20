@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <cmath>
+#include <limits>
 
 //This application replicates an ad targeting algorithm
 /*
@@ -65,6 +66,8 @@ void week_target(){
 
     //Gets file name from user
     std::string fname;
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::cin >> fname;
 
     //Converts file data to a 2d vector
@@ -108,6 +111,8 @@ void mult_weeks_target(){
     //Gets amount of weeks to be added together from user
     std::cout << "Enter the amount of weeks you would like to analyze:" << std::endl;
     int num_weeks = 0;
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::cin >> num_weeks;
 
     //Creates initial empty sparse matrix of zeros
@@ -121,6 +126,8 @@ void mult_weeks_target(){
 
         //Gets file name from user
         std::string fname;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cin >> fname;
 
         //Converts file data to a 2d vector
@@ -167,6 +174,8 @@ void weighted_target(){
 //Gets amount of weeks to be averaged to find the frequency
     std::cout << "Enter the amount of weeks you would like to analyze:" << std::endl;
     int num_weeks = 0;
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::cin >> num_weeks;
     float total = 0.0;
     //empty vector for each of the ad categories
@@ -179,6 +188,8 @@ void weighted_target(){
 
         //Gets file name from user
         std::string fname;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cin >> fname;
 
         //turns file data into a 2d vector
@@ -242,6 +253,8 @@ int main(int argc, char* argv[]) {
         generate_home_ui();
         std::cin >> choice;
         home_input_handler(choice);
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
     std::cout << "Thank you for trying our application!";
 }
