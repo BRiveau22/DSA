@@ -170,7 +170,7 @@ void weighted_target(){
     std::cin >> num_weeks;
     float total = 0.0;
     //empty vector for each of the ad categories
-    std::vector<int> visits = std::vector<int>(12, 0);
+    std::vector<int> VCount = std::vector<int>(12, 0);
 
     //loops through each week given
     for(int i=0; i<num_weeks; i++){
@@ -187,28 +187,26 @@ void weighted_target(){
         //uses the data to create a sparse matrix
         Sparse_Matrix week = Sparse_Matrix(data);
 
-        Node* current_node = week.get_head();
+        Node* temp_node = week.get_head();
 
-        while(current_node != nullptr){
-            visits[current_node->get_col()] += current_node->get_val();
-            total += current_node->get_val();
-            current_node = current_node->get_next();
+        while(temp_node != nullptr){
+            VCount[temp_node->get_col()] += temp_node->get_val();
+            total += temp_node->get_val();
+            temp_node = temp_node->get_next();
         }
     }
 
     for(int j = 0; j < 12; j++){
-        visits[j] = floor(visits[j] / total) * 100;
+        VCount[j] = floor(VCount[j] / total) * 100;
     }
-
-
 
     //display results
     std::cout << "\nThe chance of each subject appearing is as follows:" << std::endl;
 
-    std::cout << "\nNews: " << visits[0] << "\nMusic: " << visits[1] << "\nArt: " << visits[2]
-              << "\nSports: " << visits[3] << "\nMedical: " << visits[4] << "\nFood: " << visits[5]
-              << "\nCars: " << visits[6] << "\nVideo Games: " << visits[7] << "\nTechnology" << visits[8]
-              << "\nPolitics: " << visits[9] << "\nMovies/Shows: " << visits[10] << "\nVacations: " << visits[0] << "\n\n" << std::endl;
+    std::cout << "\nNews: " << VCount[0] << "\nMusic: " << VCount[1] << "\nArt: " << VCount[2]
+              << "\nSports: " << VCount[3] << "\nMedical: " << VCount[4] << "\nFood: " << VCount[5]
+              << "\nCars: " << VCount[6] << "\nVideo Games: " << VCount[7] << "\nTechnology" << VCount[8]
+              << "\nPolitics: " << VCount[9] << "\nMovies/Shows: " << VCount[10] << "\nVacations: " << VCount[11] << "\n\n" << std::endl;
 
 };
 
