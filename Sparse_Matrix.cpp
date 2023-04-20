@@ -124,8 +124,6 @@ Sparse_Matrix Sparse_Matrix::add(Sparse_Matrix add_matrix) {
 }
 
 Sparse_Matrix Sparse_Matrix::multiply(Sparse_Matrix mult_matrix) {
-	std::pair<int, int> extremes = this->get_max_row_col(mult_matrix);
-
 	//Creates a new 2D vector with the max row and column
 	std::vector<std::vector<int>> new_matrix;
 

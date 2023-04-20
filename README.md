@@ -1,11 +1,11 @@
 # DSA
 Group Members: James Allen, Benjamin Corriveau, Grant Garcia, and Connor Stubbs
 
-Summary: 
+# Summary: 
 
 This project is an interactive application, written in C++, that allows users to interact with sparse matrices to view information about advertisements that will be shown to them based on their previous online activity. In order to do this, sparse matrices are used to store data on how many times the user interacted with content in the given category, and is tracked across one week per sparse matrix.
 
-Planning: 
+# Planning: 
 
 1.) Write the scaffolding for the application (Node.cpp, Node.h, Sparse_Matrix.cpp, Sparse_Matrix.h, and application.cpp).
 
@@ -51,7 +51,35 @@ Planning:
 
 5.) Write compilation and runtime instructions.
 
-Compilation Instructions:
+# Code Explanation:
+
+## Sparse Matrix Constructors:
+
+<img width="391" alt="Screenshot 2023-04-18 144935" src="https://user-images.githubusercontent.com/123384354/232885569-aa874028-2921-4ec9-8ae4-7de0d724c2ee.png">
+
+In order to provide the most flexibility with this data structure, we decided that we would implement an empty constructor and a constructor that takes in a 2D vector of ints as a parameter. For the empty constructor, it creates an empty sparse matrix that can then have values inserted into it, while the second constructor pulls all data values that are not 0 from the 2D vector and creates a sparse matrix using that data.
+
+## Sparse Matrix Private Methods:
+
+<img width="418" alt="Screenshot 2023-04-18 151627" src="https://user-images.githubusercontent.com/123384354/232888442-7944d1e7-c66c-4eb2-823c-b482c5211a62.png">
+
+The get_max_row_col method accepts a sparse matrix as a parameter and finds the maximum row and column between the current sparse matrix and the one passed in as an argument. This data is then combined to form a pair, that is returned.
+
+<img width="530" alt="Screenshot 2023-04-18 150654" src="https://user-images.githubusercontent.com/123384354/232889243-92480105-1db2-4fab-a011-c82a5ac5cef3.png">
+
+The private add method creates an empty 2D vector of size max_row by max_col and fills it with 0s. Then, the two sparse matrices (the smaller of the two first) are then iterated through, taking the sum of the current value at the given row and column and the value held in the newly created 2D vector. A similar method is used for the private multiply method, however, the new matrix is created of size first matrix.rows by second matrix.columns. In addition to this, the multiply method multiplies the values in the two matrices if the row and column match, which is then added to the empty matrix.
+
+## Sparse Matrix Public Methods:
+
+<img width="412" alt="Screenshot 2023-04-18 151112" src="https://user-images.githubusercontent.com/123384354/232886242-33fe4f17-05a6-4a3a-8766-2299d820473e.png">
+
+The add method accepts a second sparse matrix as a parameter and will take the sum of the two matrices. It does this by getting the max row and max column of the two sparse matrices (using the private get_max_row_col method), and then passing these values to the private add method, where all of the main logic is housed. This will return a 2D vector that is then used with the second constructor to create a new sparse matrix that is returned. The multiply method operates similarly, but does not find the max row and column of the two sparse matrices.
+
+<img width="567" alt="Screenshot 2023-04-18 151354" src="https://user-images.githubusercontent.com/123384354/232887537-c8eaffd6-4004-4808-9d87-0b6133254ab6.png">
+
+The insert method accepts a row, column, and value and inserts this value into the linked list representation of the sparse matrix based on the row and column of the value to be inserted. This is accomplished according to the way in which nodes are inserted into a linked list. After this is completed, the head and tail are reassigned to the inserted node (if necessary). The print_matrix method iterates through the current matrix and prints all values within the sparse matrix to the console.
+
+# Compilation Instructions:
 
 In order to compile the program, you must have the GNU C++ compiler installed on your machine. If you do not have it installed, you can download it here: https://gcc.gnu.org/install/binaries.html
 
