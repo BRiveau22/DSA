@@ -87,7 +87,7 @@ In order to compile the program, you must have the GNU C++ compiler installed on
 
 2.) Open a terminal window and navigate to the directory where you downloaded the repository.
 
-3.) Type "g++ application.cpp Sparse_Matrix.cpp -o application.out" into the terminal window and press enter. This will create a file called "application.out" that can be run from the terminal to access the application.
+3.) Type "g++ application.cpp Sparse_Matrix.cpp Node.cpp -o application.out" into the terminal window and press enter. This will create a file called "application.out" that can be run from the terminal to access the application.
 
 4.) Type "application.out" into the terminal window and press enter.
 
