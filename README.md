@@ -53,6 +53,16 @@ This project is an interactive application, written in C++, that allows users to
 
 # Code Explanation:
 
+## Node Class:
+
+![node_constructors.png](Code%20Snippets%2Fnode_constructors.png)
+
+There are three constructors for the Node class. The first constructor is the default constructor, which sets the row, column, and value to 0 and the next pointer to NULL. The second constructor takes in a row, column, and value and sets the private variables to the values passed in as parameters. The third constructor takes in a row, column, value, and pointer to the next node and sets the private variables to the values passed in as parameters.
+
+![node_helpers.png](..%2F..%2FDownloads%2Fnode_helpers.png)
+
+There are also some small helper functions that simply return either the col, next pointer, or data of a node.
+
 ## Sparse Matrix Constructors:
 
 <img width="391" alt="Screenshot 2023-04-18 144935" src="https://user-images.githubusercontent.com/123384354/232885569-aa874028-2921-4ec9-8ae4-7de0d724c2ee.png">
