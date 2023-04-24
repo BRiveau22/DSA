@@ -132,7 +132,7 @@ In order to compile the program, you must have the GNU C++ compiler installed on
 
 # Runtime Instructions:
 
-1.) Once you have properly compiled and launched the program from the terminal, you are ready to interact with the application to view information about advertisements that will be shown to you based on your previous online activity. You will be presented with a menu where you can enter an integer from 1-5 to choose an option. The options are as follows:
+Once you have properly compiled and launched the program from the terminal, you are ready to interact with the application to view information about advertisements that will be shown to you based on your previous online activity. You will be presented with a menu where you can enter an integer from 1-5 to choose an option. The options are as follows:
 	
 	1: Displays the user's most targeted advertisement of the week.
 	
