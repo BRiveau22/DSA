@@ -55,11 +55,11 @@ This project is an interactive application, written in C++, that allows users to
 
 ## Node Class:
 
-![node_constructors.png](Code%20Snippets%2Fnode_constructors.png)
+![node_constructors](https://user-images.githubusercontent.com/123384354/234022679-cd978ef9-505c-4778-b7b3-77600c56252e.png)
 
 There are three constructors for the Node class. The first constructor is the default constructor, which sets the row, column, and value to 0 and the next pointer to NULL. The second constructor takes in a row, column, and value and sets the private variables to the values passed in as parameters. The third constructor takes in a row, column, value, and pointer to the next node and sets the private variables to the values passed in as parameters.
 
-![node_helpers.png](..%2F..%2FDownloads%2Fnode_helpers.png)
+![node_helpers](https://user-images.githubusercontent.com/123384354/234022786-31402c2d-c74c-42ad-be33-d610eed97cef.png)
 
 There are also some small helper functions that simply return either the col, next pointer, or data of a node.
 
