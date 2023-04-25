@@ -118,9 +118,9 @@ If the user selects choice 1, the week_target function is called. This function 
 Similar to the week_target function, is the mult_weeks_target function. This function does practically the same thing as the week_target function except it prompts the user for the number of weeks to be analyzed and then asks the user for the name of input files for however many weeks were previously indicated. All of these values are added to a result matrix and then the most likely to be targeted ad category among all of the weeks is printed to the console. 
 
 For our final function in our application, we created a function that tells the user the percentage of likeliness that the user will be targeted with a certain category. The user is first asked the number of weeks they want to analyze. A vector that contains 12 spaces, one for each of the categories, is created and named VCount so that it can store the number of ads each category has. A for loop is then used to iterate through the number of weeks that the user specified at the start. For each week the loop asks for the name of the file that contains the matrix they wish to use. The file data is then transferred into a 2-dimensional vector by the helper function called fto2d. This 2-D vector is then turned into a sparse matrix and this matrix is traversed to count the number of ads in each category over the week as well as the sum of all the different categories. Once all the weeks have been counted and the data is collected into the VCount vector each category’s sum is divided by the total number of ads to find the percentage occurrence of each category. This result is printed out with a label of each percentage.
+<img width="749" alt="Screenshot 2023-04-24 200137" src="https://user-images.githubusercontent.com/123384354/234140547-816a7f15-990c-40ee-bc4b-98cf8aedb988.png">
+<img width="919" alt="Screenshot 2023-04-24 200157" src="https://user-images.githubusercontent.com/123384354/234140558-b577277a-8691-4948-8c1f-e875af9de00e.png">
 
-![Alt text](../../../../../c:/Users/great/OneDrive/Pictures/Screenshots/DSA%20#1.png)
-![Alt text](../../../../../c:/Users/great/OneDrive/Pictures/Screenshots/DSA%20#2.png)
 
 # Compilation Instructions:
 
